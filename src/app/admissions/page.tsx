@@ -38,9 +38,9 @@ export default function AdmissionsPage() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">The admissions flow is framed as a calm decision journey: understand the learner, experience the teaching style, then lock into a roadmap that feels tailored.</p>
           </div>
           <div className="rounded-[30px] border border-sky-200/80 bg-[linear-gradient(135deg,rgba(59,130,246,0.16),rgba(34,211,238,0.12))] p-6 dark:border-sky-900/60">
-            <div className="rounded-[24px] bg-white/75 p-5 dark:bg-slate-950/70">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-600 dark:text-sky-300">Enrollment flow</p>
-              <div className="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-200">
+            <div className="rounded-[24px] bg-white/90 p-5 border border-sky-100 text-slate-950 dark:bg-slate-950/80 dark:text-white dark:border-slate-800">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-sky-700 dark:text-sky-300">Enrollment flow</p>
+              <div className="mt-4 space-y-3 text-sm font-medium text-slate-900 dark:text-slate-200">
                 <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Intake guidance</div>
                 <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Trial session</div>
                 <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4 text-emerald-600" /> Placement roadmap</div>

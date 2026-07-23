@@ -37,9 +37,9 @@ export default function BlogPage() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">The blog is repositioned as a premium editorial layer that surfaces teaching insight, exam thinking, and academic strategy in a more distinctive way.</p>
           </div>
           <div className="rounded-[30px] border border-orange-200/80 bg-[linear-gradient(135deg,rgba(249,115,22,0.16),rgba(251,191,36,0.16))] p-6 dark:border-orange-900/60">
-            <div className="rounded-[24px] bg-white/80 p-5 dark:bg-slate-950/70">
-              <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300"><NotebookPen className="h-4 w-4" /> Featured article</div>
-              <h2 className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white">How to think in physics</h2>
+            <div className="rounded-[24px] bg-white/90 p-5 border border-orange-100 text-slate-950 dark:bg-slate-950/80 dark:text-white dark:border-slate-800">
+              <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300 font-bold text-xs uppercase tracking-wider"><NotebookPen className="h-4 w-4" /> Featured article</div>
+              <h2 className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">How to think in physics</h2>
             </div>
           </div>
         </div>

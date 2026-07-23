@@ -5,8 +5,6 @@ import { Menu, User, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { CommandPalette } from "@/components/command-palette";
-import { SearchBar } from "@/components/search-bar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/context/auth-context";
@@ -15,7 +13,7 @@ import { cn, navigationItems } from "@/lib/utils";
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/80">
@@ -26,10 +24,6 @@ export function SiteHeader() {
           </span>
           PHYSICS WITH ASIM
         </Link>
-
-        <div className="hidden flex-1 justify-center lg:flex">
-          <SearchBar placeholder="Search topics, past papers..." />
-        </div>
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-1.5 md:flex">
           {navigationItems.map((item) => {
@@ -52,21 +46,42 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <CommandPalette />
           <ThemeToggle />
-          <Link
-            href="/teacher"
-            className="flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition"
-          >
-            <span>👑 Teacher Suite</span>
-          </Link>
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 px-3 py-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition"
-          >
-            <User className="h-3.5 w-3.5" />
-            <span>Student Portal</span>
-          </Link>
+          {isAuthenticated ? (
+            <>
+              {user?.role === "teacher" ? (
+                <Link
+                  href="/teacher"
+                  className="flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition"
+                >
+                  <span>👑 Teacher Suite</span>
+                </Link>
+              ) : (
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 px-3 py-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition"
+                >
+                  <User className="h-3.5 w-3.5" />
+                  <span>{user?.name || "Student Portal"}</span>
+                </Link>
+              )}
+              <button
+                type="button"
+                onClick={() => logout()}
+                className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-900 transition"
+              >
+                Log Out
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 rounded-full bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-indigo-700 shadow-sm transition"
+            >
+              <User className="h-3.5 w-3.5" />
+              <span>Portal Login</span>
+            </Link>
+          )}
           <Link href="/contact" className={buttonVariants({ variant: "default", size: "sm" })}>
             Free Trial
           </Link>
@@ -102,7 +117,6 @@ export function SiteHeader() {
             </Link>
           ))}
           <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-3">
-            <SearchBar placeholder="Search topics..." />
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">Theme</span>
               <ThemeToggle />

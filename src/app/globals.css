@@ -2,10 +2,10 @@
 
 :root {
   --background: #fafaf7;
-  --foreground: #0f172a;
-  --muted: #475569;
-  --panel: rgba(255, 255, 255, 0.85);
-  --border: rgba(30, 41, 59, 0.1);
+  --foreground: #090d16;
+  --muted: #334155;
+  --panel: rgba(255, 255, 255, 0.95);
+  --border: rgba(15, 23, 42, 0.12);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --primary: #4338ca;

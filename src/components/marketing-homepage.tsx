@@ -65,15 +65,15 @@ export function MarketingHomepage() {
             </div>
           </motion.div>
 
-          <motion.div {...fadeInUp} className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-slate-950 p-6 shadow-2xl dark:border-indigo-900/60 sm:p-8">
+          <motion.div {...fadeInUp} className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 p-6 shadow-2xl text-white dark:border-indigo-900/60 dark:from-slate-950 dark:to-slate-950 sm:p-8">
             <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px]" />
             <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.35),transparent_40%)]">
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} className="absolute h-72 w-72 rounded-full border border-indigo-300/30" />
               <motion.div animate={{ rotate: -360 }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }} className="absolute h-56 w-56 rounded-full border border-emerald-300/30" />
               <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute h-40 w-40 rounded-full border border-cyan-300/40" />
               <motion.div animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute h-16 w-16 rounded-full bg-indigo-500/80 blur-2xl" />
-              <div className="absolute left-6 top-6 rounded-full border border-white/10 bg-slate-900/80 px-3 py-1 text-xs font-semibold text-indigo-200">Electromagnetic Field</div>
-              <div className="absolute bottom-6 right-6 rounded-full border border-white/10 bg-slate-900/80 px-3 py-1 text-xs font-semibold text-emerald-200">Physics in Motion</div>
+              <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-slate-900/90 px-3 py-1 text-xs font-semibold text-indigo-200">Electromagnetic Field</div>
+              <div className="absolute bottom-6 right-6 rounded-full border border-white/15 bg-slate-900/90 px-3 py-1 text-xs font-semibold text-emerald-200">Physics in Motion</div>
               <div className="relative flex h-72 w-72 items-center justify-center rounded-full bg-slate-950/80 ring-1 ring-white/10">
                 <div className="absolute h-24 w-24 rounded-full border border-cyan-200/80" />
                 <div className="absolute h-[140px] w-[140px] rounded-full border border-indigo-300/50" />
@@ -232,9 +232,9 @@ export function MarketingHomepage() {
       </Section>
 
       <Section className="pb-20">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[28px] border border-indigo-200/80 bg-slate-950 px-6 py-8 text-white dark:border-indigo-900/50 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-[28px] border border-indigo-200 bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-800 px-6 py-8 text-white dark:border-indigo-900/50 dark:from-slate-950 dark:to-indigo-950 shadow-xl">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-indigo-300">Start Learning</p>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-indigo-100 dark:text-indigo-300">Start Learning</p>
             <h2 className="mt-1 text-2xl sm:text-3xl font-bold text-white">Book Your Free Trial Lesson Today</h2>
           </div>
           <Link href="/contact" className={buttonVariants({ variant: "default", size: "lg" })}>

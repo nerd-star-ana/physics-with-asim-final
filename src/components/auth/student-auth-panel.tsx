@@ -3,38 +3,39 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Eye, EyeOff, LockKeyhole, Mail, Sparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { ArrowRight, CheckCircle2, Eye, EyeOff, LockKeyhole, User, Sparkles, AlertCircle, Shield, GraduationCap } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useAuth } from "@/context/auth-context";
+import { useAuth, DEMO_ACCOUNTS } from "@/context/auth-context";
 
 type AuthVariant = "login" | "register" | "forgot" | "reset";
 
 type AuthFormValues = {
   name?: string;
-  email: string;
+  usernameOrEmail: string;
+  email?: string;
   password: string;
   confirmPassword?: string;
   remember?: boolean;
 };
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid student email."),
-  password: z.string().min(8, "Password must be at least 8 characters."),
+  usernameOrEmail: z.string().min(1, "Please enter your username or email address."),
+  password: z.string().min(1, "Please enter your password."),
   remember: z.boolean().optional(),
 });
 
 const registerSchema = z
   .object({
     name: z.string().min(2, "Please enter your full name."),
-    email: z.string().email("Please enter a valid student email."),
-    password: z.string().min(8, "Password must be at least 8 characters."),
-    confirmPassword: z.string().min(8, "Please confirm your password."),
+    email: z.string().email("Please enter a valid email address."),
+    password: z.string().min(4, "Password must be at least 4 characters."),
+    confirmPassword: z.string().min(4, "Please confirm your password."),
   })
   .refine((value) => value.password === value.confirmPassword, {
     path: ["confirmPassword"],
@@ -42,13 +43,13 @@ const registerSchema = z
   });
 
 const forgotSchema = z.object({
-  email: z.string().email("Please enter a valid student email."),
+  email: z.string().email("Please enter a valid email address."),
 });
 
 const resetSchema = z
   .object({
-    password: z.string().min(8, "Password must be at least 8 characters."),
-    confirmPassword: z.string().min(8, "Please confirm your password."),
+    password: z.string().min(4, "Password must be at least 4 characters."),
+    confirmPassword: z.string().min(4, "Please confirm your password."),
   })
   .refine((value) => value.password === value.confirmPassword, {
     path: ["confirmPassword"],
@@ -57,15 +58,15 @@ const resetSchema = z
 
 const variantCopy: Record<AuthVariant, { eyebrow: string; title: string; subtitle: string; primary: string; secondary: string; tertiary: string }> = {
   login: {
-    eyebrow: "Student Access",
-    title: "Welcome back to Physics with Asim.",
-    subtitle: "Continue your concept-first learning journey with live progress, assignments, and exam-ready study tools.",
-    primary: "Sign in to Dashboard",
+    eyebrow: "Account Portal Access",
+    title: "Welcome to Physics with Asim.",
+    subtitle: "Sign in to access your customized learning space, assignment submissions, live classes, or teacher command center.",
+    primary: "Sign in to Portal",
     secondary: "Create Account",
-    tertiary: "Forgot your password?",
+    tertiary: "Secure Login",
   },
   register: {
-    eyebrow: "New Student",
+    eyebrow: "New Student Onboarding",
     title: "Create your student account.",
     subtitle: "Set up your profile and start building a disciplined, high-performing physics learning routine.",
     primary: "Create Account",
@@ -92,35 +93,67 @@ const variantCopy: Record<AuthVariant, { eyebrow: string; title: string; subtitl
 
 export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
   const router = useRouter();
-  const { login, register: authRegister, forgotPassword, resetPassword } = useAuth();
+  const { user, isAuthenticated, isLoading, login, register: authRegister, forgotPassword, resetPassword } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const { register, handleSubmit, setError, formState: { errors } } = useForm<AuthFormValues>({
+  const { register, handleSubmit, setValue, watch, setError, formState: { errors } } = useForm<AuthFormValues>({
     defaultValues: {
+      usernameOrEmail: "",
+      email: "",
+      password: "",
       remember: true,
     },
   });
 
-  const copy = variantCopy[variant];
+  const watchedUsername = watch("usernameOrEmail");
 
+  // Dynamic role detection based on input
+  const cleanUsername = watchedUsername ? watchedUsername.trim().toLowerCase() : "";
+  const detectedRole =
+    cleanUsername === "asim" || cleanUsername.includes("asim@")
+      ? "teacher"
+      : cleanUsername.startsWith("student") || Object.keys(DEMO_ACCOUNTS).includes(cleanUsername)
+      ? "student"
+      : null;
+
+  // Auto redirect if already logged in
+  useEffect(() => {
+    if (!isLoading && isAuthenticated && user) {
+      if (user.role === "teacher") {
+        router.replace("/teacher");
+      } else {
+        router.replace("/dashboard");
+      }
+    }
+  }, [isAuthenticated, isLoading, user, router]);
+
+  const copy = variantCopy[variant];
   const passwordFieldType = showPassword ? "text" : "password";
   const confirmPasswordFieldType = showConfirmPassword ? "text" : "password";
 
   const featureList = useMemo(
     () => [
-      "Course progress tracking",
-      "Weekly exam-ready study flow",
-      "Direct instructor Q&A",
+      "Role-protected portal routing",
+      "Teacher & Student demo modes",
+      "Live exam-ready progress tracking",
     ],
     [],
   );
 
+  const handleQuickLoginSelect = (username: string) => {
+    setValue("usernameOrEmail", username);
+    setValue("password", "123");
+    setErrorMessage(null);
+  };
+
   const onSubmit = async (values: AuthFormValues) => {
     setIsSubmitting(true);
     setSuccessMessage(null);
+    setErrorMessage(null);
 
     if (variant === "login") {
       const result = loginSchema.safeParse(values);
@@ -132,10 +165,13 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
         setIsSubmitting(false);
         return;
       }
-      const res = await login(values.email, values.password);
-      if (res.success) {
-        setSuccessMessage("Sign in successful! Redirecting to student dashboard...");
-        setTimeout(() => router.push("/dashboard"), 800);
+      const res = await login(values.usernameOrEmail, values.password);
+      if (res.success && res.user) {
+        setSuccessMessage(`Welcome back, ${res.user.name}! Redirecting to your portal...`);
+        const targetPath = res.user.role === "teacher" ? "/teacher" : "/dashboard";
+        setTimeout(() => router.push(targetPath), 600);
+      } else {
+        setErrorMessage(res.message || "Invalid credentials. Please try again.");
       }
     } else if (variant === "register") {
       const result = registerSchema.safeParse(values);
@@ -147,24 +183,23 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
         setIsSubmitting(false);
         return;
       }
-      const res = await authRegister(values.name || "Student", values.email, values.password);
+      const res = await authRegister(values.name || "Student", values.email || values.usernameOrEmail, values.password);
       if (res.success) {
         setSuccessMessage("Account created! Redirecting to student dashboard...");
         setTimeout(() => router.push("/dashboard"), 800);
+      } else {
+        setErrorMessage(res.message || "Could not create account.");
       }
     } else if (variant === "forgot") {
-      const result = forgotSchema.safeParse(values);
+      const result = forgotSchema.safeParse({ email: values.email || values.usernameOrEmail });
       if (!result.success) {
-        result.error.issues.forEach((issue) => {
-          const field = issue.path[0] as keyof AuthFormValues;
-          if (field) setError(field, { message: issue.message });
-        });
+        setError("usernameOrEmail", { message: "Please enter a valid email address." });
         setIsSubmitting(false);
         return;
       }
-      const res = await forgotPassword(values.email);
+      const res = await forgotPassword(values.email || values.usernameOrEmail);
       if (res.success) {
-        setSuccessMessage("Recovery instructions sent to your email address.");
+        setSuccessMessage(res.message || "Recovery instructions sent.");
       }
     } else if (variant === "reset") {
       const result = resetSchema.safeParse(values);
@@ -211,32 +246,42 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
 
             <div className="max-w-xl space-y-4">
               <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-300">{copy.eyebrow}</p>
-              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">{copy.title}</h1>
-              <p className="max-w-lg text-base text-slate-200">{copy.subtitle}</p>
+              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{copy.title}</h1>
+              <p className="max-w-lg text-sm text-slate-200 leading-relaxed">{copy.subtitle}</p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3">
               {featureList.map((item) => (
-                <div key={item} className="rounded-2xl border border-white/15 bg-white/10 p-3 text-sm text-indigo-100 backdrop-blur-md">
+                <div key={item} className="rounded-2xl border border-white/15 bg-white/10 p-3 text-xs text-indigo-100 backdrop-blur-md font-medium">
                   {item}
                 </div>
               ))}
             </div>
 
             <div className="grid gap-4 rounded-[24px] border border-white/10 bg-slate-950/40 p-4 backdrop-blur-md sm:grid-cols-2">
-              <div>
-                <div className="text-3xl font-semibold text-white">98%</div>
-                <p className="text-sm text-indigo-200">Exam confidence rate</p>
+              <div className="space-y-1">
+                <div className="text-2xl font-bold text-amber-400 flex items-center gap-2">
+                  <Shield className="h-5 w-5" />
+                  <span>Teacher Suite</span>
+                </div>
+                <p className="text-xs text-slate-300">
+                  Login as <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-mono">asim</code> / <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-mono">123</code>
+                </p>
               </div>
-              <div>
-                <div className="text-3xl font-semibold text-white">12+</div>
-                <p className="text-sm text-indigo-200">Modules & revision packs</p>
+              <div className="space-y-1">
+                <div className="text-2xl font-bold text-cyan-400 flex items-center gap-2">
+                  <GraduationCap className="h-5 w-5" />
+                  <span>Student Portal</span>
+                </div>
+                <p className="text-xs text-slate-300">
+                  Login as <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">student1</code>..<code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">5</code> / <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">123</code>
+                </p>
               </div>
             </div>
           </div>
         </motion.div>
 
-        <Card className="p-2">
+        <Card className="p-2 border-slate-200/80 dark:border-slate-800">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -245,7 +290,12 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
           >
             <div className="flex items-center justify-between gap-2">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.38em] text-indigo-600 dark:text-indigo-400">{copy.tertiary}</p>
+                <div className="flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-600 text-xs font-black text-white">
+                    A
+                  </span>
+                  <span className="text-xs font-bold tracking-widest text-slate-900 dark:text-white uppercase">Physics With Asim</span>
+                </div>
                 <h2 className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">{copy.eyebrow}</h2>
               </div>
               <div className="rounded-full bg-indigo-50 p-2.5 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
@@ -253,10 +303,56 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
               </div>
             </div>
 
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            {/* Role Detector Badge */}
+            {variant === "login" && (
+              <div className="mt-4 flex items-center justify-between rounded-xl bg-slate-100 p-2.5 dark:bg-slate-900 text-xs">
+                <span className="font-semibold text-slate-600 dark:text-slate-400">Target Role:</span>
+                {detectedRole === "teacher" ? (
+                  <span className="flex items-center gap-1.5 rounded-lg bg-amber-500/20 px-2.5 py-1 font-extrabold text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                    👑 Teacher Account (/teacher)
+                  </span>
+                ) : detectedRole === "student" ? (
+                  <span className="flex items-center gap-1.5 rounded-lg bg-indigo-500/20 px-2.5 py-1 font-extrabold text-indigo-700 dark:text-indigo-300 border border-indigo-500/30">
+                    🎓 Student Account (/dashboard)
+                  </span>
+                ) : (
+                  <span className="font-medium text-slate-500 italic">Enter username to detect role</span>
+                )}
+              </div>
+            )}
+
+            {/* Quick Demo Fill Buttons for Testing */}
+            {variant === "login" && (
+              <div className="mt-4 space-y-2 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-3 dark:border-indigo-950/60 dark:bg-indigo-950/20">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-indigo-900 dark:text-indigo-300 flex items-center justify-between">
+                  <span>⚡ Quick Demo Fill (Password: 123)</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handleQuickLoginSelect("asim")}
+                    className="rounded-lg bg-amber-500/15 hover:bg-amber-500/30 text-amber-800 dark:text-amber-200 border border-amber-500/30 px-2.5 py-1 text-xs font-bold transition flex items-center gap-1"
+                  >
+                    👑 Teacher (asim)
+                  </button>
+                  {["student1", "student2", "student3", "student4", "student5"].map((std) => (
+                    <button
+                      key={std}
+                      type="button"
+                      onClick={() => handleQuickLoginSelect(std)}
+                      className="rounded-lg bg-indigo-500/15 hover:bg-indigo-500/30 text-indigo-800 dark:text-indigo-200 border border-indigo-500/30 px-2.5 py-1 text-xs font-semibold transition"
+                    >
+                      🎓 {std}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <form className="mt-5 space-y-4" onSubmit={handleSubmit(onSubmit)}>
               {showNameField && (
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900 dark:text-slate-100" htmlFor="name">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-900 dark:text-slate-100" htmlFor="name">
                     Full Name
                   </label>
                   <Input
@@ -265,60 +361,61 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
                     placeholder="Ahmed Khan"
                     {...register("name")}
                   />
-                  {errors.name && <p className="text-sm font-medium text-rose-600">{errors.name.message}</p>}
+                  {errors.name && <p className="text-xs font-medium text-rose-600">{errors.name.message}</p>}
                 </div>
               )}
 
               {!isReset && (
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900 dark:text-slate-100" htmlFor="email">
-                    Email Address
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-900 dark:text-slate-100" htmlFor="usernameOrEmail">
+                    {variant === "login" ? "Username or Email Address" : "Email Address"}
                   </label>
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                     <Input
-                      id="email"
-                      type="email"
-                      aria-invalid={Boolean(errors.email)}
+                      id="usernameOrEmail"
+                      aria-invalid={Boolean(errors.usernameOrEmail)}
                       className="pl-9 text-slate-900 dark:text-slate-100"
-                      placeholder="student@physicswithasim.com"
-                      {...register("email")}
+                      placeholder={variant === "login" ? "e.g. asim, student1, or student@physics.com" : "student@physics.com"}
+                      {...register("usernameOrEmail")}
                     />
                   </div>
-                  {errors.email && <p className="text-sm font-medium text-rose-600">{errors.email.message}</p>}
+                  {errors.usernameOrEmail && <p className="text-xs font-medium text-rose-600">{errors.usernameOrEmail.message}</p>}
                 </div>
               )}
 
               {!isForgot && (
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900 dark:text-slate-100" htmlFor="password">
-                    {isReset ? "New Password" : "Password"}
-                  </label>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-slate-900 dark:text-slate-100" htmlFor="password">
+                      {isReset ? "New Password" : "Password"}
+                    </label>
+                  </div>
                   <div className="relative">
                     <Input
                       id="password"
                       type={passwordFieldType}
                       aria-invalid={Boolean(errors.password)}
                       className="pr-10 text-slate-900 dark:text-slate-100"
-                      placeholder="••••••••"
+                      placeholder="Enter '123' for demo accounts"
                       {...register("password")}
                     />
                     <button
                       type="button"
                       aria-label="Toggle password visibility"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                       onClick={() => setShowPassword((value) => !value)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
-                  {errors.password && <p className="text-sm font-medium text-rose-600">{errors.password.message}</p>}
+                  {errors.password && <p className="text-xs font-medium text-rose-600">{errors.password.message}</p>}
                 </div>
               )}
 
               {showConfirmPasswordField && (
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-900 dark:text-slate-100" htmlFor="confirmPassword">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-900 dark:text-slate-100" htmlFor="confirmPassword">
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -333,21 +430,21 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
                     <button
                       type="button"
                       aria-label="Toggle confirm password visibility"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                       onClick={() => setShowConfirmPassword((value) => !value)}
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
-                  {errors.confirmPassword && <p className="text-sm font-medium text-rose-600">{errors.confirmPassword.message}</p>}
+                  {errors.confirmPassword && <p className="text-xs font-medium text-rose-600">{errors.confirmPassword.message}</p>}
                 </div>
               )}
 
               {variant === "login" && (
-                <div className="flex items-center justify-between gap-3 text-sm">
-                  <label className="inline-flex items-center gap-2 font-medium text-slate-700 dark:text-slate-300">
+                <div className="flex items-center justify-between gap-3 text-xs">
+                  <label className="inline-flex items-center gap-2 font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
                     <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" {...register("remember")} />
-                    Remember me
+                    Keep me signed in
                   </label>
                   <Link href="/forgot-password" className="font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
                     Forgot password?
@@ -355,21 +452,39 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
                 </div>
               )}
 
-              <Button type="submit" className="w-full bg-indigo-600 font-semibold text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600" disabled={isSubmitting}>
-                {isSubmitting ? "Processing..." : copy.primary}
-                <ArrowRight className="h-4 w-4" />
+              <Button
+                type="submit"
+                className="w-full bg-indigo-600 font-bold text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 h-11 text-sm shadow-md shadow-indigo-600/20"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Authenticating..." : copy.primary}
+                <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
 
               <AnimatePresence>
+                {errorMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    className="rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-xs text-rose-800 dark:border-rose-900/70 dark:bg-rose-950/40 dark:text-rose-200"
+                  >
+                    <div className="flex items-center gap-2 font-medium">
+                      <AlertCircle className="h-4 w-4 text-rose-600 shrink-0 dark:text-rose-400" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  </motion.div>
+                )}
+
                 {successMessage && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
-                    className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 dark:border-emerald-900/70 dark:bg-emerald-950/40 dark:text-emerald-200"
+                    className="rounded-xl border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 text-xs text-emerald-800 dark:border-emerald-900/70 dark:bg-emerald-950/40 dark:text-emerald-200"
                   >
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <div className="flex items-center gap-2 font-medium">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 dark:text-emerald-400" />
                       <span>{successMessage}</span>
                     </div>
                   </motion.div>
@@ -377,7 +492,7 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
               </AnimatePresence>
             </form>
 
-            <div className="mt-5 flex items-center justify-between gap-2 text-sm text-slate-700 dark:text-slate-300">
+            <div className="mt-5 flex items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-400 pt-3 border-t border-slate-100 dark:border-slate-800">
               <span>
                 {isRegister ? "Already have an account?" : variant === "forgot" ? "Remembered password?" : variant === "reset" ? "Back to login?" : "Need a student account?"}
               </span>
@@ -391,3 +506,4 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
     </div>
   );
 }
+

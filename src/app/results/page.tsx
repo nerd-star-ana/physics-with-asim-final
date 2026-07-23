@@ -30,13 +30,13 @@ export default function ResultsPage() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">The educational journey is designed to translate clarity into real classroom performance, confidence, and consistent long-term academic growth.</p>
           </div>
           <div className="rounded-[30px] border border-emerald-200/80 bg-[linear-gradient(135deg,rgba(16,185,129,0.18),rgba(59,130,246,0.16))] p-6 dark:border-emerald-900/60">
-            <div className="mb-4 flex items-center gap-2 text-emerald-700 dark:text-emerald-300"><TrendingUp className="h-4 w-4" /> Learning momentum</div>
-            <div className="rounded-2xl bg-white/75 p-4 dark:bg-slate-950/70">
+            <div className="mb-4 flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-300"><TrendingUp className="h-4 w-4" /> Learning momentum</div>
+            <div className="rounded-2xl bg-white/90 p-4 border border-emerald-100 text-slate-950 dark:bg-slate-950/80 dark:text-white dark:border-slate-800">
               <div className="flex h-44 items-end gap-3">
-                <div className="w-full rounded-t-2xl bg-sky-400/80" style={{ height: "42%" }} />
-                <div className="w-full rounded-t-2xl bg-emerald-400/80" style={{ height: "64%" }} />
-                <div className="w-full rounded-t-2xl bg-violet-400/80" style={{ height: "78%" }} />
-                <div className="w-full rounded-t-2xl bg-amber-400/80" style={{ height: "94%" }} />
+                <div className="w-full rounded-t-2xl bg-sky-500/80" style={{ height: "42%" }} />
+                <div className="w-full rounded-t-2xl bg-emerald-500/80" style={{ height: "64%" }} />
+                <div className="w-full rounded-t-2xl bg-violet-500/80" style={{ height: "78%" }} />
+                <div className="w-full rounded-t-2xl bg-amber-500/80" style={{ height: "94%" }} />
               </div>
             </div>
           </div>

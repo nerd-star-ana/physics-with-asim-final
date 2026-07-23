@@ -35,9 +35,9 @@ export default function TestimonialsPage() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">Each story is framed as a mood, not a checkbox. The page shifts from emotion to proof and back again, so social proof feels elegant rather than generic.</p>
           </div>
           <div className="rounded-[30px] border border-fuchsia-200/80 bg-[linear-gradient(135deg,rgba(217,70,239,0.14),rgba(59,130,246,0.14))] p-6 dark:border-fuchsia-900/60">
-            <div className="flex items-center gap-2 text-fuchsia-700 dark:text-fuchsia-300"><PlayCircle className="h-4 w-4" /> Student testimonial highlight</div>
-            <div className="mt-4 rounded-[24px] border border-white/40 bg-white/75 p-6 dark:bg-slate-950/70">
-              <p className="text-sm text-slate-500 dark:text-slate-300">Preview</p>
+            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-fuchsia-800 dark:text-fuchsia-300"><PlayCircle className="h-4 w-4" /> Student testimonial highlight</div>
+            <div className="mt-4 rounded-[24px] border border-fuchsia-100 bg-white/90 p-6 text-slate-950 dark:bg-slate-950/80 dark:text-white dark:border-slate-800">
+              <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Preview</p>
               <div className="mt-3 h-28 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.34),transparent_48%),linear-gradient(135deg,#0f172a,#1d4ed8)]" />
             </div>
           </div>

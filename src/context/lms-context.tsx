@@ -608,21 +608,19 @@ const LMSContext = createContext<LMSContextType | undefined>(undefined);
 
 export function LMSProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  const [activeRole, setActiveRole] = useState<"teacher" | "student">("teacher");
-  const [activeStudentId, setActiveStudentId] = useState<string>("std_1");
+  const [manualRole, setManualRole] = useState<"teacher" | "student">("teacher");
+  const [manualStudentId, setManualStudentId] = useState<string>("std_1");
 
-  useEffect(() => {
-    if (user) {
-      if (user.role === "teacher") {
-        setActiveRole("teacher");
-      } else if (user.role === "student") {
-        setActiveRole("student");
-        if (user.studentId) {
-          setActiveStudentId(user.studentId);
-        }
-      }
-    }
-  }, [user]);
+  const activeRole = user?.role ? user.role : manualRole;
+  const activeStudentId = user?.role === "student" && user.studentId ? user.studentId : manualStudentId;
+
+  const setActiveRole = (role: "teacher" | "student") => {
+    setManualRole(role);
+  };
+
+  const setActiveStudentId = (studentId: string) => {
+    setManualStudentId(studentId);
+  };
 
   const [classes, setClasses] = useState<Classroom[]>(INITIAL_CLASSES);
   const [students, setStudents] = useState<StudentRecord[]>(INITIAL_STUDENTS);

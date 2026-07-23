@@ -40,8 +40,8 @@ export default function FaqPage() {
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">This page moves away from a static list and becomes a guided support experience with a more editorial and confidence-led rhythm.</p>
           </div>
           <div className="rounded-[30px] border border-cyan-200/80 bg-[linear-gradient(135deg,rgba(56,189,248,0.18),rgba(6,182,212,0.12))] p-6 dark:border-cyan-900/60">
-            <div className="flex items-center gap-2 text-cyan-700 dark:text-cyan-300"><CircleHelp className="h-4 w-4" /> Guided support</div>
-            <div className="mt-4 rounded-[24px] bg-white/80 p-4 text-sm text-slate-700 dark:bg-slate-950/70 dark:text-slate-200">Everything is arranged to answer the common questions a parent or student would have before taking the next step.</div>
+            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-cyan-800 dark:text-cyan-300"><CircleHelp className="h-4 w-4" /> Guided support</div>
+            <div className="mt-4 rounded-[24px] bg-white/90 p-4 border border-cyan-100 text-sm font-medium text-slate-900 dark:bg-slate-950/80 dark:text-slate-100 dark:border-slate-800">Everything is arranged to answer the common questions a parent or student would have before taking the next step.</div>
           </div>
         </div>
       </Section>

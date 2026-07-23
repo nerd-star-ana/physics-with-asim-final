@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
@@ -16,8 +16,11 @@ import {
   CalendarCheck,
   Eye,
   ShieldAlert,
+  LogOut,
 } from "lucide-react";
 import { useLMS } from "@/context/lms-context";
+import { useAuth } from "@/context/auth-context";
+import { AuthGuard } from "@/components/auth/auth-guard";
 import { cn } from "@/lib/utils";
 
 const TEACHER_NAV = [
@@ -35,106 +38,129 @@ const TEACHER_NAV = [
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { logout } = useAuth();
   const { students, classes, activeStudentId, setActiveStudentId } = useLMS();
 
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-      {/* Top Banner */}
-      <div className="sticky top-0 z-40 bg-slate-900/90 border-b border-amber-500/20 backdrop-blur-md px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 font-black text-lg shadow-lg shadow-amber-500/30">
-            A
-          </span>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-sm font-bold text-white tracking-wide">SIR ASIM TEACHER COMMAND CENTER</h1>
-              <span className="rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2 py-0.5 border border-amber-500/30">
-                MASTER ADMIN
-              </span>
-            </div>
-            <p className="text-xs text-slate-400">Total Teacher Control • Physics With Asim LMS</p>
-          </div>
-        </div>
-
-        {/* Student View Simulation Switcher */}
-        <div className="flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl p-1.5 text-xs">
-          <Eye className="h-4 w-4 text-cyan-400 ml-1" />
-          <span className="text-slate-300 font-medium hidden sm:inline">Preview Student View:</span>
-          <select
-            value={activeStudentId}
-            onChange={(e) => setActiveStudentId(e.target.value)}
-            className="bg-slate-900 text-slate-200 text-xs font-semibold rounded-lg px-2 py-1 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-500"
-          >
-            {students.map((st) => {
-              const cls = classes.find((c) => c.id === st.classId);
-              return (
-                <option key={st.id} value={st.id}>
-                  {st.name} ({cls?.code || "Unassigned"} - {cls?.name || "No Class"})
-                </option>
-              );
-            })}
-          </select>
-          <Link
-            href="/dashboard"
-            className="rounded-lg bg-cyan-500/20 border border-cyan-500/40 px-2.5 py-1 text-cyan-300 font-bold hover:bg-cyan-500/30 transition text-xs"
-          >
-            Open Student Portal
-          </Link>
-        </div>
-      </div>
-
-      <div className="flex-1 flex flex-col md:flex-row">
-        {/* Left Sidebar */}
-        <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800/80 p-4 shrink-0 flex flex-col justify-between">
-          <div className="space-y-6">
+    <AuthGuard allowedRole="teacher">
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+        {/* Top Banner */}
+        <div className="sticky top-0 z-40 bg-slate-900/90 border-b border-amber-500/20 backdrop-blur-md px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 font-black text-lg shadow-lg shadow-amber-500/30">
+              A
+            </span>
             <div>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 px-3 mb-2">
-                Teacher Management
-              </p>
-              <nav className="space-y-1">
-                {TEACHER_NAV.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = pathname === item.href;
+              <div className="flex items-center gap-2">
+                <h1 className="text-sm font-bold text-white tracking-wide">SIR ASIM TEACHER COMMAND CENTER</h1>
+                <span className="rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2 py-0.5 border border-amber-500/30">
+                  MASTER ADMIN
+                </span>
+              </div>
+              <p className="text-xs text-slate-400">Total Teacher Control • Physics With Asim LMS</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 flex-wrap">
+            {/* Student View Simulation Switcher */}
+            <div className="flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl p-1.5 text-xs">
+              <Eye className="h-4 w-4 text-cyan-400 ml-1" />
+              <span className="text-slate-300 font-medium hidden sm:inline">Preview Student View:</span>
+              <select
+                value={activeStudentId}
+                onChange={(e) => setActiveStudentId(e.target.value)}
+                className="bg-slate-900 text-slate-200 text-xs font-semibold rounded-lg px-2 py-1 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+              >
+                {students.map((st) => {
+                  const cls = classes.find((c) => c.id === st.classId);
                   return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition",
-                        isActive
-                          ? "bg-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20"
-                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
-                      )}
-                    >
-                      <Icon className={cn("h-4 w-4", isActive ? "text-slate-950" : "text-amber-400")} />
-                      <span>{item.label}</span>
-                    </Link>
+                    <option key={st.id} value={st.id}>
+                      {st.name} ({cls?.code || "Unassigned"} - {cls?.name || "No Class"})
+                    </option>
                   );
                 })}
-              </nav>
+              </select>
             </div>
 
-            <div className="rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-800/60 to-slate-900 border border-amber-500/20 p-3.5 space-y-2">
-              <div className="flex items-center gap-2 text-amber-400 font-bold text-xs">
-                <ShieldAlert className="h-4 w-4 shrink-0" />
-                <span>Teacher Rule System</span>
+            {/* Logout Button */}
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 rounded-xl bg-rose-500/10 border border-rose-500/30 px-3 py-1.5 text-xs font-bold text-rose-400 hover:bg-rose-500/20 transition"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              <span>Log out</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="flex-1 flex flex-col md:flex-row">
+          {/* Left Sidebar */}
+          <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800/80 p-4 shrink-0 flex flex-col justify-between">
+            <div className="space-y-6">
+              <div>
+                <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 px-3 mb-2">
+                  Teacher Management
+                </p>
+                <nav className="space-y-1">
+                  {TEACHER_NAV.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-bold transition",
+                          isActive
+                            ? "bg-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20"
+                            : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                        )}
+                      >
+                        <Icon className={cn("h-4 w-4", isActive ? "text-slate-950" : "text-amber-400")} />
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
+                </nav>
               </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
-                Students cannot self-enroll or edit content. Every resource, quiz, and assignment is explicitly assigned by Sir Asim.
-              </p>
+
+              <div className="rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-800/60 to-slate-900 border border-amber-500/20 p-3.5 space-y-2">
+                <div className="flex items-center gap-2 text-amber-400 font-bold text-xs">
+                  <ShieldAlert className="h-4 w-4 shrink-0" />
+                  <span>Teacher Rule System</span>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  Students cannot self-enroll or edit content. Every resource, quiz, and assignment is explicitly assigned by Sir Asim.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="mt-8 pt-4 border-t border-slate-800 text-center">
-            <p className="text-[11px] text-slate-500">Physics With Asim v4.0 LMS</p>
-          </div>
-        </aside>
+            <div className="mt-8 pt-4 border-t border-slate-800 flex flex-col items-center gap-3">
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-800 hover:bg-rose-950/40 hover:text-rose-400 py-2 text-xs font-bold text-slate-300 transition border border-slate-700"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                <span>Log out (Sir Asim)</span>
+              </button>
+              <p className="text-[11px] text-slate-500">Physics With Asim v4.0 LMS</p>
+            </div>
+          </aside>
 
-        {/* Main Workspace */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden max-w-7xl mx-auto w-full">
-          {children}
-        </main>
+          {/* Main Workspace */}
+          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden max-w-7xl mx-auto w-full">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 }

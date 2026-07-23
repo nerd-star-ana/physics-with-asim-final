@@ -327,7 +327,7 @@ export default function TeacherAssignmentsPage() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1">Sir Asim's Written Feedback</label>
+                <label className="block text-slate-300 font-bold mb-1">Sir Asim&apos;s Written Feedback</label>
                 <textarea
                   value={feedbackInput}
                   onChange={(e) => setFeedbackInput(e.target.value)}

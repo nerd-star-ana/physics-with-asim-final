@@ -16,8 +16,8 @@ export default function ContactPage() {
           </div>
           <div className="rounded-[30px] border border-rose-200/80 bg-[linear-gradient(135deg,rgba(244,63,94,0.16),rgba(59,130,246,0.14))] p-6 dark:border-rose-900/60">
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70"><Mail className="mb-3 h-5 w-5 text-rose-600" /> hello@physicswithasim.com</div>
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70"><MessageCircle className="mb-3 h-5 w-5 text-rose-600" /> WhatsApp support</div>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-rose-100 dark:border-slate-800 font-semibold text-xs sm:text-sm"><Mail className="mb-3 h-5 w-5 text-rose-600 dark:text-rose-400" /> hello@physicswithasim.com</div>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-rose-100 dark:border-slate-800 font-semibold text-xs sm:text-sm"><MessageCircle className="mb-3 h-5 w-5 text-rose-600 dark:text-rose-400" /> WhatsApp support</div>
             </div>
           </div>
         </div>

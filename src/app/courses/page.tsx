@@ -45,13 +45,13 @@ export default function CoursesPage() {
           </div>
           <div className="rounded-[30px] border border-violet-200/80 bg-[linear-gradient(135deg,rgba(124,58,237,0.16),rgba(59,130,246,0.16))] p-6 dark:border-violet-900/60">
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70">
-                <p className="text-sm text-slate-500 dark:text-slate-300">Qualification coverage</p>
-                <p className="mt-2 text-2xl font-semibold">8+</p>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-violet-100 dark:border-slate-800">
+                <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Qualification coverage</p>
+                <p className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">8+</p>
               </div>
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70">
-                <p className="text-sm text-slate-500 dark:text-slate-300">Custom pacing</p>
-                <p className="mt-2 text-2xl font-semibold">Weekly</p>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-violet-100 dark:border-slate-800">
+                <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Custom pacing</p>
+                <p className="mt-1 text-2xl font-bold text-slate-950 dark:text-white">Weekly</p>
               </div>
             </div>
           </div>

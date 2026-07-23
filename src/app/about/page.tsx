@@ -55,22 +55,22 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.45 }} className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-slate-950 p-6 text-white shadow-xl dark:border-indigo-900/60">
+          <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.45 }} className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-900 p-6 text-white shadow-xl dark:border-indigo-900/60 dark:from-slate-950 dark:to-slate-950">
             <div className="relative z-10 space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.34em] text-indigo-300">Teaching Identity</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.34em] text-indigo-100 dark:text-indigo-300">Teaching Identity</p>
                   <h2 className="mt-1 text-2xl font-bold text-white">Asim’s Approach</h2>
                 </div>
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-xl font-bold text-white shadow-md">A</div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-indigo-700 font-extrabold text-xl shadow-md dark:bg-indigo-600 dark:text-white">A</div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                  <p className="text-xs font-semibold text-indigo-200">Pedagogy</p>
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                  <p className="text-xs font-semibold text-indigo-100 dark:text-indigo-200">Pedagogy</p>
                   <p className="mt-1 text-base font-bold text-white">Structured intuition</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-                  <p className="text-xs font-semibold text-indigo-200">Outcomes</p>
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                  <p className="text-xs font-semibold text-indigo-100 dark:text-indigo-200">Outcomes</p>
                   <p className="mt-1 text-base font-bold text-white">Exam readiness</p>
                 </div>
               </div>

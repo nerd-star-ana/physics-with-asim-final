@@ -43,8 +43,8 @@ export default function ResourcesPage() {
           </div>
           <div className="rounded-[30px] border border-amber-200/80 bg-[linear-gradient(135deg,rgba(251,191,36,0.18),rgba(249,115,22,0.16))] p-6 dark:border-amber-900/60">
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70"><FolderOpen className="mb-3 h-5 w-5 text-amber-600" /><p className="text-sm">Organized categories</p></div>
-              <div className="rounded-2xl bg-white/80 p-4 dark:bg-slate-950/70"><ArrowDownToLine className="mb-3 h-5 w-5 text-amber-600" /><p className="text-sm">Download-ready content</p></div>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-amber-100 dark:border-slate-800"><FolderOpen className="mb-3 h-5 w-5 text-amber-600 dark:text-amber-400" /><p className="text-sm font-bold">Organized categories</p></div>
+              <div className="rounded-2xl bg-white/90 p-4 text-slate-950 dark:bg-slate-950/80 dark:text-white border border-amber-100 dark:border-slate-800"><ArrowDownToLine className="mb-3 h-5 w-5 text-amber-600 dark:text-amber-400" /><p className="text-sm font-bold">Download-ready content</p></div>
             </div>
           </div>
         </div>

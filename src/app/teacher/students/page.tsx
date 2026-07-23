@@ -378,7 +378,7 @@ export default function TeacherStudentsPage() {
               <div className="pt-2">
                 <p className="font-bold text-slate-300 mb-1">Teacher Remarks by Sir Asim:</p>
                 <p className="text-slate-400 leading-relaxed italic bg-slate-900 p-3 rounded-xl border border-slate-800">
-                  "{selectedStudentForReport.name} demonstrates good conceptual understanding in mechanics and thermal physics. Continued effort in paper 4 numerical steps will secure an A*."
+                  &quot;{selectedStudentForReport.name} demonstrates good conceptual understanding in mechanics and thermal physics. Continued effort in paper 4 numerical steps will secure an A*.&quot;
                 </p>
               </div>
             </div>
