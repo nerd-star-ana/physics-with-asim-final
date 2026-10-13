@@ -1,0 +1,16 @@
+▲ Next.js 16.2.11 (Turbopack)
+
+  Creating an optimized production build ...
+Found 1 warning while optimizing generated CSS:
+
+[2m│   }[22m
+[2m│ }[22m
+[2m│[22m --font-heading: 'Space Grotesk', sans-serif;
+[2m┆[22m                 [33m[2m^--[22m Invalid token in pseudo element: WhiteSpace(" ")[39m
+[2m┆[22m
+[2m│ --font-body: 'Inter', sans-serif;[22m
+[2m│ :root {[22m
+
+✓ Compiled successfully in 6.1s
+  Running TypeScript ...
+^C
