@@ -6,7 +6,6 @@ import { ChevronDown, CircleHelp } from "lucide-react";
 import { SearchBar } from "@/components/search-bar";
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 
 const faqs = [
   {
@@ -49,26 +48,24 @@ export default function FaqPage() {
       <Section>
         <SectionHeader eyebrow="Questions" title="Modern answers, not generic blocks" description="The FAQ becomes a refined support surface with clear hierarchy, layered thinking, and a more comfortable browsing rhythm." />
         <div className="mb-6"><SearchBar placeholder="Search questions" /></div>
-        <div className="space-y-4">
+        <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <Card key={faq.question} className="overflow-hidden">
-                <button type="button" aria-expanded={isOpen} onClick={() => setOpenIndex(isOpen ? null : index)} className="flex w-full items-center justify-between gap-4 p-6 text-left">
+              <article key={faq.question} className="py-1">
+                <button type="button" aria-expanded={isOpen} aria-controls={`faq-answer-${index}`} onClick={() => setOpenIndex(isOpen ? null : index)} className="flex w-full items-center justify-between gap-4 py-5 text-left">
                   <div className="flex items-start gap-3">
-                    <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-100 text-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-300"><CircleHelp className="h-4 w-4" /></span>
-                    <div>
-                      <CardTitle className="text-base">{faq.question}</CardTitle>
-                    </div>
+                    <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-md bg-amber-100 text-slate-950 dark:bg-amber-300"><CircleHelp className="h-4 w-4" /></span>
+                    <span className="text-base font-semibold text-slate-950 dark:text-white">{faq.question}</span>
                   </div>
                   <ChevronDown className={`h-5 w-5 shrink-0 transition ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 {isOpen ? (
-                  <CardContent className="pt-0">
-                    <CardDescription>{faq.answer}</CardDescription>
-                  </CardContent>
+                  <div id={`faq-answer-${index}`} className="pb-5 pl-11 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                    {faq.answer}
+                  </div>
                 ) : null}
-              </Card>
+              </article>
             );
           })}
         </div>

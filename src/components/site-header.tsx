@@ -16,16 +16,16 @@ export function SiteHeader() {
   const { user, isAuthenticated, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/80">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-slate-950/95">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3 text-sm font-bold tracking-[0.24em] text-slate-950 dark:text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-base font-extrabold text-white shadow-md shadow-indigo-600/30 dark:bg-indigo-500">
+        <Link href="/" className="flex items-center gap-3 text-sm font-bold tracking-[0.14em] text-slate-950 dark:text-white">
+          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-amber-400 text-base font-extrabold text-slate-950">
             A
           </span>
           PHYSICS WITH ASIM
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-1.5 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-1.5 lg:flex">
           {navigationItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -33,10 +33,10 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3.5 py-2 text-xs font-bold transition",
+                    "rounded-md px-3.5 py-2 text-xs font-semibold transition-colors",
                   isActive
-                    ? "bg-indigo-100 text-indigo-900 dark:bg-indigo-950 dark:text-indigo-200"
-                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white",
+                      ? "bg-amber-100 text-slate-950 dark:bg-amber-300 dark:text-slate-950"
+                      : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white",
                 )}
               >
                 {item.label}
@@ -45,7 +45,7 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
           {isAuthenticated ? (
             <>
@@ -59,7 +59,7 @@ export function SiteHeader() {
               ) : (
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 px-3 py-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition"
+                  className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                 >
                   <User className="h-3.5 w-3.5" />
                   <span>{user?.name || "Student Portal"}</span>
@@ -76,7 +76,7 @@ export function SiteHeader() {
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-1.5 rounded-full bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-indigo-700 shadow-sm transition"
+              className="flex items-center gap-1.5 rounded-md bg-amber-400 px-3.5 py-1.5 text-xs font-semibold text-slate-950 transition-colors hover:bg-amber-500"
             >
               <User className="h-3.5 w-3.5" />
               <span>Portal Login</span>
@@ -92,23 +92,23 @@ export function SiteHeader() {
           aria-label="Toggle navigation menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
-          className="inline-flex rounded-full border border-slate-200 p-2 text-slate-800 dark:border-slate-700 dark:text-slate-100 md:hidden"
+          className="inline-flex rounded-md border border-slate-200 p-2 text-slate-800 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-900 lg:hidden"
           onClick={() => setMobileOpen((open) => !open)}
         >
           {mobileOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
-      <div id="mobile-navigation" className={cn("border-t border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-950 md:hidden", mobileOpen ? "block" : "hidden")}>
+      <div id="mobile-navigation" className={cn("border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 lg:hidden", mobileOpen ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-7xl flex-col px-4 py-4 space-y-1">
           {navigationItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               className={cn(
-                "rounded-2xl px-3.5 py-2.5 text-sm font-semibold transition",
+                "rounded-md px-3.5 py-2.5 text-sm font-medium transition-colors",
                 pathname === item.href
-                  ? "bg-indigo-100 text-indigo-900 dark:bg-indigo-950 dark:text-indigo-200"
+                  ? "bg-amber-100 text-slate-950 dark:bg-amber-300 dark:text-slate-950"
                   : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900",
               )}
               onClick={() => setMobileOpen(false)}
@@ -124,7 +124,7 @@ export function SiteHeader() {
             {isAuthenticated ? (
               <Link
                 href="/dashboard"
-                className="flex h-10 items-center justify-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 text-xs font-bold text-indigo-900 transition hover:bg-indigo-100 dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-200"
+                className="flex h-10 items-center justify-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-4 text-xs font-semibold text-slate-900 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                 onClick={() => setMobileOpen(false)}
               >
                 <User className="h-3.5 w-3.5" />
@@ -133,7 +133,7 @@ export function SiteHeader() {
             ) : (
               <Link
                 href="/login"
-                className="flex h-10 items-center justify-center rounded-full border border-slate-200 px-4 text-xs font-bold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-900"
+                className="flex h-10 items-center justify-center rounded-md border border-slate-200 px-4 text-xs font-semibold text-slate-800 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-900"
                 onClick={() => setMobileOpen(false)}
               >
                 Student Portal

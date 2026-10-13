@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { PlayCircle, Star } from "lucide-react";
 
 import { Section } from "@/components/ui/section";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const testimonials = [
   {
@@ -27,46 +26,46 @@ const testimonials = [
 export default function TestimonialsPage() {
   return (
     <div className="page-shell">
-      <Section className="pt-14">
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+      <Section className="grid gap-8 pt-12 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
             <p className="text-sm uppercase tracking-[0.34em] text-fuchsia-600 dark:text-fuchsia-300">Testimonials</p>
             <h1 className="mt-3 text-5xl font-semibold tracking-tight text-slate-950 dark:text-white sm:text-6xl">A review wall built for trust and warmth.</h1>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">Each story is framed as a mood, not a checkbox. The page shifts from emotion to proof and back again, so social proof feels elegant rather than generic.</p>
           </div>
-          <div className="rounded-[30px] border border-fuchsia-200/80 bg-[linear-gradient(135deg,rgba(217,70,239,0.14),rgba(59,130,246,0.14))] p-6 dark:border-fuchsia-900/60">
-            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-fuchsia-800 dark:text-fuchsia-300"><PlayCircle className="h-4 w-4" /> Student testimonial highlight</div>
-            <div className="mt-4 rounded-[24px] border border-fuchsia-100 bg-white/90 p-6 text-slate-950 dark:bg-slate-950/80 dark:text-white dark:border-slate-800">
+          <div className="border-y border-slate-200 py-5 dark:border-slate-800" data-scroll-reveal>
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-300"><PlayCircle className="h-4 w-4 text-amber-700 dark:text-amber-300" /> Student testimonial highlight</div>
+            <div className="mt-6">
               <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Preview</p>
-              <div className="mt-3 h-28 rounded-2xl bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.34),transparent_48%),linear-gradient(135deg,#0f172a,#1d4ed8)]" />
+              <div className="mt-3 h-28 border-l-2 border-amber-400 bg-slate-100 dark:bg-slate-950" />
             </div>
           </div>
-        </div>
       </Section>
 
-      <Section>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
+        <Section className="grid gap-8 py-12 lg:grid-cols-[220px_1fr] lg:gap-14">
+          <aside className="self-start lg:sticky lg:top-24">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-800 dark:text-amber-300">Student voices</p>
+            <h2 className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white">Learning experiences</h2>
+          </aside>
+          <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {testimonials.map((testimonial, index) => (
-            <motion.div key={testimonial.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }}>
-              <Card className="h-full">
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white dark:bg-sky-600">{testimonial.name.split(" ").map((part) => part[0]).join("")}</div>
-                    <div className="flex gap-1 text-amber-500">
-                      {Array.from({ length: 5 }).map((_, starIndex) => <Star key={`${testimonial.name}-${starIndex}`} className="h-4 w-4 fill-current" />)}
-                    </div>
-                  </div>
-                  <CardTitle>{testimonial.name}</CardTitle>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500 dark:text-slate-300">{testimonial.role}</p>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>“{testimonial.quote}”</CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <motion.article key={testimonial.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }} className="grid gap-4 py-6 sm:grid-cols-[56px_1fr]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-950 text-sm font-semibold text-white dark:bg-slate-700">{testimonial.name.split(" ").map((part) => part[0]).join("")}</div>
+              <div>
+                <div className="flex gap-1 text-amber-600 dark:text-amber-400">
+                  {Array.from({ length: 5 }).map((_, starIndex) => <Star key={`${testimonial.name}-${starIndex}`} className="h-4 w-4 fill-current" />)}
+                </div>
+                <p className="mt-3 max-w-3xl text-lg leading-7 text-slate-900 dark:text-slate-100">“{testimonial.quote}”</p>
+                <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="font-semibold text-slate-950 dark:text-white">{testimonial.name}</h3>
+                  <p className="text-xs uppercase tracking-[0.16em] text-slate-600 dark:text-slate-300">{testimonial.role}</p>
+                </div>
+              </div>
+            </motion.article>
           ))}
-        </div>
-      </Section>
+          </div>
+        </Section>
+      </section>
     </div>
   );
 }

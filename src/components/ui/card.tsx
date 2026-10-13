@@ -7,10 +7,11 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
     <div
       ref={ref}
       className={cn(
-        "rounded-[28px] border border-slate-200/80 bg-white/80 text-slate-950 shadow-[0_18px_65px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/75 dark:text-slate-50",
-        "relative overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_70px_rgba(15,23,42,0.14)]",
+        "rounded-lg border border-slate-200 bg-white text-slate-950 shadow-[0_2px_10px_rgba(23,23,23,0.04)] dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50",
+        "relative overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_5px_16px_rgba(23,23,23,0.08)]",
         className,
       )}
+      data-scroll-reveal
       {...props}
     />
   ),

@@ -94,6 +94,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <Button
                 variant="outline"
                 size="sm"
+                aria-label="Log out"
                 onClick={handleLogout}
                 className="h-8 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200 dark:border-rose-900 dark:text-rose-400 dark:hover:bg-rose-950"
               >
@@ -180,7 +181,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             </aside>
 
             {/* Main Route Content */}
-            <main className="space-y-6">
+            <main className="space-y-6" data-scroll-reveal>
               {children}
             </main>
           </div>

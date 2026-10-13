@@ -235,46 +235,45 @@ export function StudentAuthPanel({ variant }: { variant: AuthVariant }) {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-[linear-gradient(135deg,#0b1120_0%,#1e1b4b_50%,#0f172a_100%)] p-6 text-white shadow-xl dark:border-indigo-900/60"
+          className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-slate-950 dark:border-slate-800 dark:bg-slate-900 dark:text-white"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.25),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.2),transparent_35%)]" />
           <div className="relative space-y-6">
-            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.36em] text-indigo-300">
+            <div className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-300">
               <Sparkles className="h-4 w-4" />
               Physics with Asim
             </div>
 
             <div className="max-w-xl space-y-4">
-              <p className="text-sm font-medium uppercase tracking-[0.4em] text-indigo-300">{copy.eyebrow}</p>
-              <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{copy.title}</h1>
-              <p className="max-w-lg text-sm text-slate-200 leading-relaxed">{copy.subtitle}</p>
+              <p className="text-sm font-medium uppercase tracking-[0.16em] text-slate-600 dark:text-slate-300">{copy.eyebrow}</p>
+              <h1 className="text-3xl font-semibold text-slate-950 dark:text-white sm:text-4xl">{copy.title}</h1>
+              <p className="max-w-lg text-sm text-slate-600 leading-relaxed dark:text-slate-300">{copy.subtitle}</p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3">
               {featureList.map((item) => (
-                <div key={item} className="rounded-2xl border border-white/15 bg-white/10 p-3 text-xs text-indigo-100 backdrop-blur-md font-medium">
+                <div key={item} className="rounded-md border border-slate-200 bg-white p-3 text-xs text-slate-700 font-medium dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">
                   {item}
                 </div>
               ))}
             </div>
 
-            <div className="grid gap-4 rounded-[24px] border border-white/10 bg-slate-950/40 p-4 backdrop-blur-md sm:grid-cols-2">
+            <div className="grid gap-4 rounded-md border border-slate-200 bg-slate-100 p-4 sm:grid-cols-2 dark:border-slate-700 dark:bg-slate-950">
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-amber-400 flex items-center gap-2">
+                <div className="text-2xl font-semibold text-amber-700 flex items-center gap-2 dark:text-amber-300">
                   <Shield className="h-5 w-5" />
                   <span>Teacher Suite</span>
                 </div>
-                <p className="text-xs text-slate-300">
-                  Login as <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-mono">asim</code> / <code className="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 font-mono">123</code>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Login as <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono dark:bg-slate-800 dark:text-amber-300">asim</code> / <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono dark:bg-slate-800 dark:text-amber-300">123</code>
                 </p>
               </div>
               <div className="space-y-1">
-                <div className="text-2xl font-bold text-cyan-400 flex items-center gap-2">
+                <div className="text-2xl font-semibold text-slate-800 flex items-center gap-2 dark:text-slate-200">
                   <GraduationCap className="h-5 w-5" />
                   <span>Student Portal</span>
                 </div>
-                <p className="text-xs text-slate-300">
-                  Login as <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">student1</code>..<code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">5</code> / <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 font-mono">123</code>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Login as <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono dark:bg-slate-800 dark:text-slate-200">student1</code>..<code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono dark:bg-slate-800 dark:text-slate-200">5</code> / <code className="bg-slate-200 px-1.5 py-0.5 rounded text-slate-900 font-mono dark:bg-slate-800 dark:text-slate-200">123</code>
                 </p>
               </div>
             </div>

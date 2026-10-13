@@ -5,7 +5,6 @@ import { ImageIcon } from "lucide-react";
 
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const galleryItems = [
   {
@@ -41,25 +40,18 @@ export default function GalleryPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section className="grid gap-8 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
         <SectionHeader eyebrow="Showcase" title="Curated moments from the learning journey" description="The goal is to present the platform as a living, polished ecosystem, not a plain archive." />
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {galleryItems.map((item, index) => (
-            <motion.div key={item.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }}>
-              <Card className="h-full overflow-hidden">
-                <div className="p-6">
-                  <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${item.tone}`}>
-                    <ImageIcon className="h-5 w-5" />
-                  </div>
-                </div>
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <motion.article key={item.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }} className="grid gap-4 py-6 sm:grid-cols-[64px_1fr]">
+              <div className={`flex h-11 w-11 items-center justify-center rounded-md ${item.tone}`}><ImageIcon className="h-5 w-5" /></div>
+              <div>
+                <span className="text-xs font-semibold text-amber-800 dark:text-amber-300">0{index + 1}</span>
+                <h2 className="mt-1 text-lg font-semibold text-slate-950 dark:text-white">{item.title}</h2>
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">{item.description}</p>
+              </div>
+            </motion.article>
           ))}
         </div>
       </Section>

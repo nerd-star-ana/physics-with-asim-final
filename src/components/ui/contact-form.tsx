@@ -71,7 +71,7 @@ export function ContactForm() {
           id="contact-message"
           aria-label="Message"
           rows={4}
-          className="flex min-h-28 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-normal text-slate-900 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:ring-indigo-900"
+          className="flex min-h-28 w-full rounded-md border border-slate-200 bg-white px-4 py-3 text-sm font-normal text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:ring-indigo-900"
           placeholder="Share your current physics syllabus, target grade, or trial request details..."
           {...register("message")}
         />

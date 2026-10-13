@@ -23,24 +23,25 @@ export default function ContactPage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Card className="h-full bg-[linear-gradient(135deg,rgba(244,63,94,0.12),rgba(14,165,233,0.08))] dark:bg-[linear-gradient(135deg,rgba(244,63,94,0.18),rgba(30,64,175,0.18))]">
-            <CardContent className="space-y-4 pt-6 text-sm text-slate-700 dark:text-slate-200">
-              <div className="flex items-center gap-3"><Mail className="h-4 w-4 text-rose-600" /><span>Email: hello@physicswithasim.com</span></div>
-              <div className="flex items-center gap-3"><MessageCircle className="h-4 w-4 text-rose-600" /><span>WhatsApp: +92 300 0000000</span></div>
-              <div className="flex items-center gap-3"><CalendarClock className="h-4 w-4 text-rose-600" /><span>Business Hours: Mon - Sat, 9:00 AM - 7:00 PM</span></div>
-              <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-rose-600" /><span>Location: Online tuition for students worldwide</span></div>
-            </CardContent>
-          </Card>
+      <section className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
+        <Section className="grid gap-10 py-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <aside className="self-start border-l-2 border-amber-400 pl-5" data-scroll-reveal>
+            <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Get in touch</h2>
+            <dl className="mt-6 divide-y divide-slate-200 dark:divide-slate-800">
+              <div className="flex gap-3 py-4"><Mail className="mt-1 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" /><div><dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">Email</dt><dd className="mt-1 text-sm text-slate-800 dark:text-slate-200">Email: hello@physicswithasim.com</dd></div></div>
+              <div className="flex gap-3 py-4"><MessageCircle className="mt-1 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" /><div><dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">WhatsApp</dt><dd className="mt-1 text-sm text-slate-800 dark:text-slate-200">WhatsApp: +92 300 0000000</dd></div></div>
+              <div className="flex gap-3 py-4"><CalendarClock className="mt-1 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" /><div><dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">Business hours</dt><dd className="mt-1 text-sm text-slate-800 dark:text-slate-200">Business Hours: Mon - Sat, 9:00 AM - 7:00 PM</dd></div></div>
+              <div className="flex gap-3 py-4"><MapPin className="mt-1 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" /><div><dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">Location</dt><dd className="mt-1 text-sm text-slate-800 dark:text-slate-200">Location: Online tuition for students worldwide</dd></div></div>
+            </dl>
+          </aside>
 
-          <Card>
-            <CardContent className="pt-6">
+          <Card data-scroll-reveal>
+            <CardContent className="p-5 sm:p-7">
               <ContactForm />
             </CardContent>
           </Card>
-        </div>
-      </Section>
+        </Section>
+      </section>
     </div>
   );
 }

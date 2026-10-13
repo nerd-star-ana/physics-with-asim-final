@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MotionConfig } from "framer-motion";
 import { Inter, Space_Grotesk } from "next/font/google";
 
 import { BackToTopButton } from "@/components/back-to-top";
@@ -54,16 +55,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${inter.variable} ${spaceGrotesk.variable} h-full`}>
-      <body suppressHydrationWarning className="min-h-full bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.10),transparent_25%),#f8fbff] text-slate-950 antialiased dark:bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),transparent_22%),#020617] dark:text-slate-50">
+      <body suppressHydrationWarning className="min-h-full antialiased">
         <ThemeProvider>
           <AuthProvider>
             <LMSProvider>
-              <div className="relative flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-                <SiteFooter />
-                <BackToTopButton />
-              </div>
+              <MotionConfig reducedMotion="user">
+                <div className="relative flex min-h-screen flex-col">
+                  <SiteHeader />
+                  <div className="flex-1">{children}</div>
+                  <SiteFooter />
+                  <BackToTopButton />
+                </div>
+              </MotionConfig>
             </LMSProvider>
           </AuthProvider>
         </ThemeProvider>

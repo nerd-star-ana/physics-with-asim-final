@@ -43,30 +43,30 @@ export default function TeacherCommandCenter() {
   return (
     <div className="space-y-8">
       {/* Top Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-600 via-amber-500 to-indigo-600 p-6 sm:p-8 text-slate-950 shadow-2xl">
+      <div data-scroll-reveal className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-slate-950 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-8">
         <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/20 backdrop-blur-md px-3 py-1 text-xs font-black text-slate-950">
+          <div className="inline-flex items-center gap-2 rounded-md border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-semibold text-slate-950 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
             <Sparkles className="h-4 w-4" />
             <span>TEACHER CONTROL CENTER</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-950">
+          <h1 className="text-2xl sm:text-4xl font-semibold text-slate-950 dark:text-white">
             Welcome back, Sir Asim!
           </h1>
-          <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-relaxed">
+          <p className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed dark:text-slate-300">
             You are managing <span className="font-black underline">{totalClasses} Active Classes</span> and <span className="font-black underline">{totalStudents} Enrolled Students</span>. Everything in this LMS is strictly teacher-driven — students only see what you assign to their class color.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <Link
               href="/teacher/classes"
-              className="inline-flex items-center gap-2 rounded-2xl bg-slate-950 text-white px-4 py-2.5 text-xs font-bold shadow-lg hover:bg-slate-900 transition"
+              className="inline-flex items-center gap-2 rounded-md bg-slate-950 text-white px-4 py-2.5 text-xs font-semibold hover:bg-slate-800 transition-colors dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
             >
               <Plus className="h-4 w-4" />
               <span>Create New Class</span>
             </Link>
             <Link
               href="/teacher/assignments"
-              className="inline-flex items-center gap-2 rounded-2xl bg-white/30 backdrop-blur-md text-slate-950 px-4 py-2.5 text-xs font-bold border border-slate-950/20 hover:bg-white/40 transition"
+              className="inline-flex items-center gap-2 rounded-md bg-white text-slate-950 px-4 py-2.5 text-xs font-semibold border border-slate-300 hover:bg-slate-100 transition-colors dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
             >
               <FileCheck className="h-4 w-4" />
               <span>Assign Homework ({assignments.length})</span>
@@ -77,48 +77,48 @@ export default function TeacherCommandCenter() {
 
       {/* Top Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-2">
+        <div className="rounded-lg bg-white border border-slate-200 p-5 space-y-2 dark:bg-slate-900 dark:border-slate-800">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">Total Classes</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Total Classes</span>
             <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
               <School className="h-5 w-5" />
             </div>
           </div>
-          <p className="text-3xl font-black text-white">{totalClasses}</p>
-          <p className="text-xs text-slate-400">Batches with color identities</p>
+          <p className="text-3xl font-semibold text-slate-950 dark:text-white">{totalClasses}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400">Batches with color identities</p>
         </div>
 
-        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-2">
+        <div className="rounded-lg bg-white border border-slate-200 p-5 space-y-2 dark:bg-slate-900 dark:border-slate-800">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">Total Students</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Total Students</span>
             <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
               <Users className="h-5 w-5" />
             </div>
           </div>
-          <p className="text-3xl font-black text-white">{totalStudents}</p>
-          <p className="text-xs text-slate-400">Enrolled & assigned by teacher</p>
+          <p className="text-3xl font-semibold text-slate-950 dark:text-white">{totalStudents}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400">Enrolled & assigned by teacher</p>
         </div>
 
-        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-2">
+        <div className="rounded-lg bg-white border border-slate-200 p-5 space-y-2 dark:bg-slate-900 dark:border-slate-800">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">Pending Grading</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Pending Grading</span>
             <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400">
               <Clock className="h-5 w-5" />
             </div>
           </div>
           <p className="text-3xl font-black text-amber-400">{pendingGradingSubmissions.length}</p>
-          <p className="text-xs text-slate-400">Submissions awaiting feedback</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400">Submissions awaiting feedback</p>
         </div>
 
-        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-5 space-y-2">
+        <div className="rounded-lg bg-white border border-slate-200 p-5 space-y-2 dark:bg-slate-900 dark:border-slate-800">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-400">Active Quizzes</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Active Quizzes</span>
             <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400">
               <GraduationCap className="h-5 w-5" />
             </div>
           </div>
-          <p className="text-3xl font-black text-white">{totalQuizzes}</p>
-          <p className="text-xs text-slate-400">Checkpoint tests created</p>
+          <p className="text-3xl font-semibold text-slate-950 dark:text-white">{totalQuizzes}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-400">Checkpoint tests created</p>
         </div>
       </div>
 
@@ -126,7 +126,7 @@ export default function TeacherCommandCenter() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-extrabold text-white">Classroom Management Hub</h2>
+            <h2 className="text-lg font-semibold text-slate-950 dark:text-white">Classroom Management Hub</h2>
             <p className="text-xs text-slate-400">Each batch has its own distinct color identity, Zoom links, and timetable.</p>
           </div>
           <Link href="/teacher/classes" className="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1">

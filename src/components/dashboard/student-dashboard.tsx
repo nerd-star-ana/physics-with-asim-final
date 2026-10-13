@@ -153,19 +153,18 @@ export function StudentDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
-      <section className="relative overflow-hidden rounded-[30px] border border-indigo-200/80 bg-[linear-gradient(135deg,#0b1120_0%,#1e1b4b_50%,#0f172a_100%)] p-6 text-white shadow-xl dark:border-indigo-900/60 sm:p-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.3),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(16,185,129,0.2),transparent_40%)]" />
+      <section data-scroll-reveal className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-slate-950 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-white sm:p-8">
         <div className="relative flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-xl space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300">
+            <div className="inline-flex items-center gap-2 rounded-md border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Assigned Class: {cls?.name || "Physics A-Level Batch A"} ({cls?.code || "PHY-A1"})</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h1 className="text-3xl font-semibold text-slate-950 dark:text-white sm:text-4xl">
               Welcome back, {studentName}!
             </h1>
-            <p className="text-sm leading-6 text-slate-200">
-              Instructor: <span className="font-bold text-amber-300">Sir Asim</span> • Timetable: <span className="font-semibold text-cyan-300">{cls?.timetable || "Mon & Wed • 5:00 PM"}</span>
+            <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+              Instructor: <span className="font-semibold text-slate-950 dark:text-amber-300">Sir Asim</span> • Timetable: <span className="font-semibold text-slate-700 dark:text-slate-200">{cls?.timetable || "Mon & Wed • 5:00 PM"}</span>
             </p>
             <div className="pt-2 flex flex-wrap gap-2 text-xs">
               {cls?.zoomUrl && (
@@ -173,7 +172,7 @@ export function StudentDashboard() {
                   href={cls.zoomUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-blue-500/20 border border-blue-400/30 px-3 py-1.5 font-bold text-blue-300 hover:bg-blue-500/30 transition"
+                  className="inline-flex items-center gap-1.5 rounded-md bg-slate-950 px-3 py-1.5 font-semibold text-white transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
                 >
                   <Video className="h-3.5 w-3.5" /> Join Live Class
                 </a>
@@ -183,7 +182,7 @@ export function StudentDashboard() {
                   href={cls.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 px-3 py-1.5 font-bold text-emerald-300 hover:bg-emerald-500/30 transition"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-800 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900"
                 >
                   <MessageSquare className="h-3.5 w-3.5" /> WhatsApp Group
                 </a>
@@ -191,16 +190,16 @@ export function StudentDashboard() {
             </div>
           </div>
 
-          <div className="flex items-center gap-5 rounded-[24px] border border-white/15 bg-slate-950/50 p-5 backdrop-blur-md">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-[conic-gradient(#6366f1_0_78%,rgba(255,255,255,0.15)_78%_100%)] p-[8px]">
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-950 text-center text-sm font-bold text-white">
+          <div className="flex items-center gap-5 rounded-md border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-950">
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-[conic-gradient(#f5c400_0_78%,#e6e6e2_78%_100%)] p-[8px]">
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-white text-center text-sm font-bold text-slate-950 dark:bg-slate-900 dark:text-white">
                 78%
               </div>
             </div>
-            <div className="space-y-1.5 text-xs font-medium text-slate-200">
-              <div className="flex items-center gap-2 text-indigo-300 font-semibold"><Flame className="h-4 w-4 text-amber-400" /> 14 Day Study Streak</div>
-              <div className="flex items-center gap-2"><Clock3 className="h-4 w-4 text-cyan-400" /> 128 Study Hours</div>
-              <div className="flex items-center gap-2"><Trophy className="h-4 w-4 text-emerald-400" /> 1,480 XP Points</div>
+            <div className="space-y-1.5 text-xs font-medium text-slate-700 dark:text-slate-300">
+              <div className="flex items-center gap-2 font-semibold text-slate-950 dark:text-white"><Flame className="h-4 w-4 text-amber-500" /> 14 Day Study Streak</div>
+              <div className="flex items-center gap-2"><Clock3 className="h-4 w-4 text-slate-500" /> 128 Study Hours</div>
+              <div className="flex items-center gap-2"><Trophy className="h-4 w-4 text-amber-600" /> 1,480 XP Points</div>
             </div>
           </div>
         </div>

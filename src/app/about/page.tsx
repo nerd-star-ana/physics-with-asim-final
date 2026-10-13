@@ -5,7 +5,6 @@ import { Compass, HeartHandshake, Rocket, Sparkles } from "lucide-react";
 
 import { Section } from "@/components/ui/section";
 import { SectionHeader } from "@/components/ui/section-header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const milestones = [
   {
@@ -55,23 +54,23 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.45 }} className="relative overflow-hidden rounded-[32px] border border-indigo-200/80 bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-900 p-6 text-white shadow-xl dark:border-indigo-900/60 dark:from-slate-950 dark:to-slate-950">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-6 text-slate-950 dark:border-slate-800 dark:bg-slate-900 dark:text-white">
             <div className="relative z-10 space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.34em] text-indigo-100 dark:text-indigo-300">Teaching Identity</p>
-                  <h2 className="mt-1 text-2xl font-bold text-white">Asim’s Approach</h2>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-600 dark:text-slate-300">Teaching Identity</p>
+                  <h2 className="mt-1 text-2xl font-semibold text-slate-950 dark:text-white">Asim’s Approach</h2>
                 </div>
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-indigo-700 font-extrabold text-xl shadow-md dark:bg-indigo-600 dark:text-white">A</div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-md bg-amber-400 text-slate-950 font-bold text-xl">A</div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
-                  <p className="text-xs font-semibold text-indigo-100 dark:text-indigo-200">Pedagogy</p>
-                  <p className="mt-1 text-base font-bold text-white">Structured intuition</p>
+                <div className="rounded-md border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-950">
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Pedagogy</p>
+                  <p className="mt-1 text-base font-semibold text-slate-950 dark:text-white">Structured intuition</p>
                 </div>
-                <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
-                  <p className="text-xs font-semibold text-indigo-100 dark:text-indigo-200">Outcomes</p>
-                  <p className="mt-1 text-base font-bold text-white">Exam readiness</p>
+                <div className="rounded-md border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-950">
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">Outcomes</p>
+                  <p className="mt-1 text-base font-semibold text-slate-950 dark:text-white">Exam readiness</p>
                 </div>
               </div>
             </div>
@@ -79,59 +78,53 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section className="pt-2">
-        <SectionHeader eyebrow="Mission" title="The reason the platform exists" description="Every teaching decision is designed to reduce overwhelm and increase clarity for students preparing for high-stakes physics qualifications." />
-        <div className="grid gap-4 lg:grid-cols-3">
+      <Section className="grid gap-8 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+        <div>
+          <SectionHeader eyebrow="Mission" title="The reason the platform exists" description="Every teaching decision is designed to reduce overwhelm and increase clarity for students preparing for high-stakes physics qualifications." />
+        </div>
+        <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {values.map((item) => {
             const Icon = item.icon;
             return (
-              <Card key={item.title} className="h-full border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
-                <CardHeader>
-                  <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-slate-950 dark:text-white">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm leading-6 text-slate-700 dark:text-slate-300">{item.description}</CardDescription>
-                </CardContent>
-              </Card>
+              <article key={item.title} className="grid gap-3 py-5 sm:grid-cols-[48px_1fr]">
+                <Icon className="mt-1 h-5 w-5 text-amber-700 dark:text-amber-300" aria-hidden="true" />
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-950 dark:text-white">{item.title}</h2>
+                  <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">{item.description}</p>
+                </div>
+              </article>
             );
           })}
         </div>
       </Section>
 
-      <Section>
-        <SectionHeader eyebrow="Milestones" title="A teaching story shaped by progression" description="The platform combines academic rigor with emotional steadiness, translating complexity into confidence." />
-        <div className="grid gap-4 md:grid-cols-3">
+      <section className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
+        <Section className="grid gap-8 py-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+          <SectionHeader eyebrow="Milestones" title="A teaching story shaped by progression" description="The platform combines academic rigor with emotional steadiness, translating complexity into confidence." />
+          <ol className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {milestones.map((milestone, index) => (
-            <motion.div key={milestone.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }}>
-              <Card className="h-full border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
-                <CardHeader>
-                  <div className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">0{index + 1}</div>
-                  <CardTitle className="text-xl font-bold text-slate-950 dark:text-white">{milestone.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm leading-6 text-slate-700 dark:text-slate-300">{milestone.description}</CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <motion.li key={milestone.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="grid gap-3 py-5 sm:grid-cols-[48px_1fr]">
+              <span className="text-sm font-semibold text-amber-800 dark:text-amber-300">0{index + 1}</span>
+              <div>
+                <h3 className="text-lg font-semibold text-slate-950 dark:text-white">{milestone.title}</h3>
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">{milestone.description}</p>
+              </div>
+            </motion.li>
           ))}
-        </div>
-      </Section>
+          </ol>
+        </Section>
+      </section>
 
       <Section className="pb-20">
-        <div className="rounded-[32px] border border-indigo-200 bg-indigo-50/80 p-6 dark:border-indigo-900/60 dark:bg-indigo-950/40">
-          <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+        <div className="grid gap-6 border-y border-slate-200 py-8 dark:border-slate-800 lg:grid-cols-[1fr_0.9fr]">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.34em] text-indigo-600 dark:text-indigo-400">Teaching Philosophy</p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-3xl">Confidence is built through precision, not pressure.</h2>
             </div>
-            <div className="rounded-[24px] bg-white p-5 text-sm leading-6 text-slate-800 dark:bg-slate-900 dark:text-slate-200">
+            <div className="border-l-2 border-amber-400 pl-5 text-sm leading-6 text-slate-800 dark:text-slate-200">
               <div className="mb-2 flex items-center gap-2 font-bold text-indigo-600 dark:text-indigo-400"><HeartHandshake className="h-4 w-4" /> Student-centered support</div>
               Students are guided through problems with a transparent method that encourages ownership, curiosity, and long-term exam confidence.
             </div>
-          </div>
         </div>
       </Section>
     </div>

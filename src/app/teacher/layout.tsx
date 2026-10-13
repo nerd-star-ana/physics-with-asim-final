@@ -49,27 +49,27 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
 
   return (
     <AuthGuard allowedRole="teacher">
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+      <div className="teacher-workspace min-h-screen bg-slate-50 text-slate-950 flex flex-col dark:bg-slate-950 dark:text-slate-100">
         {/* Top Banner */}
-        <div className="sticky top-0 z-40 bg-slate-900/90 border-b border-amber-500/20 backdrop-blur-md px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="sticky top-0 z-40 bg-white/95 border-b border-slate-200 px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-4 dark:bg-slate-950/95 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 font-black text-lg shadow-lg shadow-amber-500/30">
+            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-amber-400 text-slate-950 font-black text-lg">
               A
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-sm font-bold text-white tracking-wide">SIR ASIM TEACHER COMMAND CENTER</h1>
+                <h1 className="text-sm font-bold text-slate-950 tracking-wide dark:text-white">SIR ASIM TEACHER COMMAND CENTER</h1>
                 <span className="rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-extrabold px-2 py-0.5 border border-amber-500/30">
                   MASTER ADMIN
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Total Teacher Control • Physics With Asim LMS</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Total Teacher Control • Physics With Asim LMS</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
             {/* Student View Simulation Switcher */}
-            <div className="flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl p-1.5 text-xs">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-md p-1.5 text-xs dark:bg-slate-900 dark:border-slate-700">
               <Eye className="h-4 w-4 text-cyan-400 ml-1" />
               <span className="text-slate-300 font-medium hidden sm:inline">Preview Student View:</span>
               <select
@@ -102,7 +102,7 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
 
         <div className="flex-1 flex flex-col md:flex-row">
           {/* Left Sidebar */}
-          <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800/80 p-4 shrink-0 flex flex-col justify-between">
+              <aside className="w-full md:w-64 bg-white border-r border-slate-200 p-4 shrink-0 flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800">
             <div className="space-y-6">
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 px-3 mb-2">
@@ -156,7 +156,7 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
           </aside>
 
           {/* Main Workspace */}
-          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden max-w-7xl mx-auto w-full">
+          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden max-w-7xl mx-auto w-full" data-scroll-reveal>
             {children}
           </main>
         </div>
