@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
@@ -38,13 +38,12 @@ const TEACHER_NAV = [
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const { logout } = useAuth();
   const { students, classes, activeStudentId, setActiveStudentId } = useLMS();
 
   const handleLogout = () => {
     logout();
-    router.push("/login");
+    window.location.assign("/login");
   };
 
   return (
@@ -131,12 +130,12 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
                 </nav>
               </div>
 
-              <div className="rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-800/60 to-slate-900 border border-amber-500/20 p-3.5 space-y-2">
-                <div className="flex items-center gap-2 text-amber-400 font-bold text-xs">
+              <div className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface-alt)] p-3.5 space-y-2">
+                <div className="flex items-center gap-2 text-[var(--color-secondary)] font-bold text-xs">
                   <ShieldAlert className="h-4 w-4 shrink-0" />
                   <span>Teacher Rule System</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[var(--color-text)] leading-relaxed">
                   Students cannot self-enroll or edit content. Every resource, quiz, and assignment is explicitly assigned by Sir Asim.
                 </p>
               </div>

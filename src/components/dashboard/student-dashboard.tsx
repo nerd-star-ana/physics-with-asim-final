@@ -191,7 +191,7 @@ export function StudentDashboard() {
           </div>
 
           <div className="flex items-center gap-5 rounded-md border border-slate-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-950">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-[conic-gradient(#f5c400_0_78%,#e6e6e2_78%_100%)] p-[8px]">
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-[conic-gradient(var(--color-accent)_0_78%,var(--color-border)_78%_100%)] p-[8px]">
               <div className="flex h-full w-full items-center justify-center rounded-full bg-white text-center text-sm font-bold text-slate-950 dark:bg-slate-900 dark:text-white">
                 78%
               </div>

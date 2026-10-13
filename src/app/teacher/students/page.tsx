@@ -398,7 +398,7 @@ export default function TeacherStudentsPage() {
       {/* Certificate Modal */}
       {selectedStudentForCertificate && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-2xl rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/40 border-2 border-amber-500/40 p-8 space-y-6 text-white shadow-2xl relative text-center">
+          <div className="w-full max-w-2xl rounded-lg bg-[var(--color-primary)] border border-[var(--color-accent)] p-8 space-y-6 text-[var(--color-surface)] shadow-lg relative text-center">
             <button
               onClick={() => setSelectedStudentForCertificate(null)}
               className="absolute top-4 right-4 p-1 rounded-full text-slate-400 hover:text-white"

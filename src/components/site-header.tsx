@@ -16,10 +16,10 @@ export function SiteHeader() {
   const { user, isAuthenticated, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 dark:border-slate-800 dark:bg-slate-950/95">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3 text-sm font-bold tracking-[0.14em] text-slate-950 dark:text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-amber-400 text-base font-extrabold text-slate-950">
+        <Link href="/" className="flex items-center gap-3 text-sm font-bold tracking-[0.08em] text-[var(--color-primary)]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-[var(--color-accent)] text-base font-extrabold text-white">
             A
           </span>
           PHYSICS WITH ASIM
@@ -35,8 +35,8 @@ export function SiteHeader() {
                 className={cn(
                     "rounded-md px-3.5 py-2 text-xs font-semibold transition-colors",
                   isActive
-                      ? "bg-amber-100 text-slate-950 dark:bg-amber-300 dark:text-slate-950"
-                      : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white",
+                      ? "bg-[var(--color-surface-alt)] text-[var(--color-primary)]"
+                      : "text-slate-700 hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-primary)]",
                 )}
               >
                 {item.label}
@@ -76,7 +76,7 @@ export function SiteHeader() {
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-1.5 rounded-md bg-amber-400 px-3.5 py-1.5 text-xs font-semibold text-slate-950 transition-colors hover:bg-amber-500"
+              className="flex items-center gap-1.5 rounded-md bg-[var(--color-accent)] px-3.5 py-1.5 text-xs font-semibold text-[var(--color-button-primary-text)] transition-colors hover:bg-[var(--color-accent-hover)]"
             >
               <User className="h-3.5 w-3.5" />
               <span>Portal Login</span>
@@ -92,14 +92,14 @@ export function SiteHeader() {
           aria-label="Toggle navigation menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
-          className="inline-flex rounded-md border border-slate-200 p-2 text-slate-800 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-900 lg:hidden"
+          className="inline-flex rounded-md border border-[var(--color-border)] p-2 text-[var(--color-primary)] transition-colors hover:bg-[var(--color-surface-alt)] lg:hidden"
           onClick={() => setMobileOpen((open) => !open)}
         >
           {mobileOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
-      <div id="mobile-navigation" className={cn("border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950 lg:hidden", mobileOpen ? "block" : "hidden")}>
+      <div id="mobile-navigation" className={cn("border-t border-[var(--color-border)] bg-[var(--color-surface)] lg:hidden", mobileOpen ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-7xl flex-col px-4 py-4 space-y-1">
           {navigationItems.map((item) => (
             <Link
@@ -108,15 +108,15 @@ export function SiteHeader() {
               className={cn(
                 "rounded-md px-3.5 py-2.5 text-sm font-medium transition-colors",
                 pathname === item.href
-                  ? "bg-amber-100 text-slate-950 dark:bg-amber-300 dark:text-slate-950"
-                  : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-900",
+                  ? "bg-[var(--color-surface-alt)] text-[var(--color-primary)]"
+                  : "text-slate-700 hover:bg-[var(--color-surface-alt)]",
               )}
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
           ))}
-          <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-3">
+          <div className="mt-3 space-y-3 border-t border-[var(--color-border)] pt-3">
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">Theme</span>
               <ThemeToggle />

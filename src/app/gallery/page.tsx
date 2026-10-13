@@ -10,17 +10,17 @@ const galleryItems = [
   {
     title: "Classroom Moments",
     description: "A curated look at interactive lesson environments and student collaboration.",
-    tone: "bg-sky-100/70 text-sky-700 dark:bg-sky-950/60 dark:text-sky-200",
+    tone: "bg-[var(--color-surface-alt)] text-[var(--color-primary)]",
   },
   {
     title: "Events",
     description: "Celebrating student milestones, workshop moments, and academic achievements.",
-    tone: "bg-emerald-100/70 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-200",
+    tone: "bg-[var(--color-secondary)] text-white",
   },
   {
     title: "Student Work",
     description: "Examples of polished question-solving, structured revision, and concept mastery.",
-    tone: "bg-violet-100/70 text-violet-700 dark:bg-violet-950/60 dark:text-violet-200",
+    tone: "bg-[var(--color-accent-soft)] text-[var(--color-primary)]",
   },
 ];
 

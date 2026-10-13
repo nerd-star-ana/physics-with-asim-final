@@ -7,8 +7,8 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
     <div
       ref={ref}
       className={cn(
-        "rounded-lg border border-slate-200 bg-white text-slate-950 shadow-[0_2px_10px_rgba(23,23,23,0.04)] dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50",
-        "relative overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_5px_16px_rgba(23,23,23,0.08)]",
+        "rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-primary)] shadow-[0_3px_12px_rgba(24,59,99,0.07)]",
+        "relative overflow-hidden transition duration-200 hover:border-[var(--color-accent)] hover:shadow-[0_6px_18px_rgba(24,59,99,0.12)]",
         className,
       )}
       data-scroll-reveal
@@ -27,14 +27,14 @@ CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-lg font-semibold tracking-tight", className)} {...props} />
+    <h3 ref={ref} className={cn("text-lg font-semibold", className)} {...props} />
   ),
 );
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-slate-600 dark:text-slate-300", className)} {...props} />
+    <p ref={ref} className={cn("text-sm text-[var(--color-text)]", className)} {...props} />
   ),
 );
 CardDescription.displayName = "CardDescription";

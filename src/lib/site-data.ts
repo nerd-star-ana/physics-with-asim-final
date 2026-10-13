@@ -52,6 +52,17 @@ export const testimonials = [
   },
 ];
 
+export const outcomeStories = [
+  {
+    title: "Higher confidence under pressure",
+    description: "Students report stronger exam formulation and calmer problem-solving behavior after a short plateau-busting period.",
+  },
+  {
+    title: "More visible academic momentum",
+    description: "The structured rhythm encourages consistency, sustained revision behavior, and better time management in the learning cycle.",
+  },
+];
+
 export const learningTimeline = [
   {
     title: "Assessment & Diagnosis",
